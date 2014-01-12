@@ -18,3 +18,17 @@ FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
 COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER
 IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
 CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+--------------------------------------------------------------------------------------
+
+ADDITIONAL INFORMATION
+
+This project is based on:
+  SVMLight library by Thorsten Joachims thorsten@joachims.org
+inspired by:
+  SvmLightLib wrapper by Miha Grcar
+and some parts of SvmLightLib.cpp are taken from:
+  https://github.com/DaHoC/trainHOG
+
+This project is provided under the MIT License, yet its usage shall not violate
+the licensing terms of SVMLight ( http://svmlight.joachims.org/ ).
