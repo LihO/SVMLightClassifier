@@ -15,13 +15,13 @@ namespace SVMLight
     public:
         SVMTrainer(const std::string& featuresFileName);
         void writeFeatureVectorToFile(const std::vector<float>& featureVector, bool isPositive);
-        void trainAndSaveModel(std::string& modelFileName);
+        void trainAndSaveModel(const std::string& modelFileName);
     };
 
     extern class SVMClassifier
     {
     public:
-        SVMClassifier(std::string& featuresFileName);
+        SVMClassifier(const std::string& featuresFileName);
         std::vector<float> getDescriptorVector();
     };
 }

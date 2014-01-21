@@ -94,8 +94,8 @@ namespace SVMLight
             return &theInstance;
         }
 
-        inline void saveModelToFile(std::string _modelFileName) {
-            write_model(static_cast<char*>(&_modelFileName[0]), model);
+        inline void saveModelToFile(const std::string& _modelFileName) {
+            write_model(const_cast<char*>(_modelFileName.c_str()), model);
         }
 
         void loadModelFromFile(const std::string& _modelFileName) {
@@ -153,6 +153,9 @@ namespace SVMLight
 
     SVMTrainer::SVMTrainer(const std::string& featuresFileName)
     {
+        // use the C locale while creating the model file:
+        setlocale(LC_ALL, "C");
+
         featuresFileName_ = featuresFileName;
         featuresFile_.open(featuresFileName_.c_str(), std::ios::out);
     }
@@ -166,31 +169,19 @@ namespace SVMLight
         featuresFile_ << std::endl;
     }
 
-    void SVMTrainer::trainAndSaveModel(std::string& modelFileName)
+    void SVMTrainer::trainAndSaveModel(const std::string& modelFileName)
     {
         if (featuresFile_.is_open())
             featuresFile_.close();
-            
-        /*
-          Apart from features.dat that we were building till this point,
-          we're going to save classifier.dat (=modelFileName), which should
-          be used for loading the SVMClassifier... unfortunately SVMLightImpl's
-          loadModelFromFile doesn't seem to work
-        */
 
         SVMLightImpl::getInstance()->read_problem(featuresFileName_);
         SVMLightImpl::getInstance()->train();
         SVMLightImpl::getInstance()->saveModelToFile(modelFileName);
     }
 
-    SVMClassifier::SVMClassifier(std::string& filename)
+    SVMClassifier::SVMClassifier(const std::string& modelFilename)
     {
-        // TODO: make the loadModelFromFile work
-         SVMLightImpl::getInstance()->loadModelFromFile(filename);
-        
-        // train using "features.dat":
-        //SVMLightImpl::getInstance()->read_problem(filename);
-        //SVMLightImpl::getInstance()->train();
+         SVMLightImpl::getInstance()->loadModelFromFile(modelFilename);
     }
         
     std::vector<float> SVMClassifier::getDescriptorVector()
