@@ -67,6 +67,9 @@ namespace SVMLight
             kernel_parm->coef_const = 1;
             kernel_parm->kernel_type = LINEAR; // -t 0
             kernel_parm->poly_degree = 3;
+			
+			kernel_parm->custom[0] = '0';
+			kernel_parm->custom[1] = '\0';
         }
 
         virtual ~SVMLightImpl() {
@@ -134,7 +137,7 @@ namespace SVMLight
                 SVECTOR* singleSupportVectorValues = singleSupportVector->fvec;
                 WORD singleSupportVectorComponent;
                 // Walk through components of the support vector and populate our detector vector
-                for (unsigned long singleFeature = 0; singleFeature < model->totwords; ++singleFeature) {
+                for (long singleFeature = 0; singleFeature < model->totwords; ++singleFeature) {
                     singleSupportVectorComponent = singleSupportVectorValues->words[singleFeature];
                     singleDetectorVector.at(singleSupportVectorComponent.wnum) += (singleSupportVectorComponent.weight * model->alpha[ssv]);
                 }
@@ -183,11 +186,11 @@ namespace SVMLight
     SVMClassifier::SVMClassifier(std::string& filename)
     {
         // TODO: make the loadModelFromFile work
-        // SVMLightImpl::getInstance()->loadModelFromFile(filename);
+         SVMLightImpl::getInstance()->loadModelFromFile(filename);
         
         // train using "features.dat":
-        SVMLightImpl::getInstance()->read_problem(filename);
-        SVMLightImpl::getInstance()->train();
+        //SVMLightImpl::getInstance()->read_problem(filename);
+        //SVMLightImpl::getInstance()->train();
     }
         
     std::vector<float> SVMClassifier::getDescriptorVector()
