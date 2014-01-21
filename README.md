@@ -25,13 +25,13 @@ namespace SVMLight
     public:
         SVMTrainer(const std::string& featuresFileName);
         void writeFeatureVectorToFile(const std::vector<float>& featureVector, bool isPositive);
-        void trainAndSaveModel(std::string& modelFileName);
+        void trainAndSaveModel(const std::string& modelFileName);
     };
 
     class SVMClassifier
     {
     public:
-        SVMClassifier(std::string& modelFileName);
+        SVMClassifier(const std::string& modelFileName);
         std::vector<float> getDescriptorVector();
     };
 }
@@ -101,8 +101,7 @@ The classification can be then performed by the instance of `HOGDescriptor`, you
 ```C++
     HOGDescriptor hog;
     hog.winSize = Size(32,48);
-    std::string classifierModelName("features.dat");
-    SVMLight::SVMClassifier c(classifierModelName);
+    SVMLight::SVMClassifier c("classifier.dat");
     vector<float> descriptorVector = c.getDescriptorVector();
     hog.setSVMDetector(descriptorVector);
 ```
