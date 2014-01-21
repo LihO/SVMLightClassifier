@@ -101,7 +101,7 @@ The classification can be then performed by the instance of `HOGDescriptor`, you
 ```C++
     HOGDescriptor hog;
     hog.winSize = Size(32,48);
-    std::string classifierModelName("features.dat");
+    std::string classifierModelName("classifier.dat");
     SVMLight::SVMClassifier c(classifierModelName);
     vector<float> descriptorVector = c.getDescriptorVector();
     hog.setSVMDetector(descriptorVector);
